@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Text, View, ActivityIndicator, FlatList } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Link } from 'expo-router';
 
 import { getTopCryptos } from '../lib/coinlore'
 import { AnimatedCryptoCard } from './cryptoCard'
@@ -18,6 +19,9 @@ export function CryptoList() {
 
   return (
     <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
+      <Link href="/about">
+        About
+      </Link>
         {
             cryptos.length === 0 ? (
                 <View style={{ flex: 1, justifyContent: "center", alignContent: "center" }}>
