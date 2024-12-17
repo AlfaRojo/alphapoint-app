@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { View, ActivityIndicator, FlatList, Pressable, Text } from 'react-native';
+import { View, ActivityIndicator, FlatList, Pressable, Text, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Link } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import Entypo from '@expo/vector-icons/Entypo';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 
 import { getTopCryptos } from '../lib/coinlore'
 import { AnimatedCryptoCard } from './cryptoCard'
@@ -40,12 +39,12 @@ export function CryptoList() {
   }
 
   return (
-    <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
-      <Text>Wellcome {username} to the Top 50 Cryptos</Text>
+    <View style={[{ paddingTop: insets.top, paddingBottom: insets.bottom }]}>
+      <Text style={styles.wellcome}>Wellcome {username} to the Top 50 Cryptos</Text>
       <Link asChild href="/login">
       <Pressable onPress={logout}>
-        <Text>
-          <Ionicons name="return-up-back" size={24} color="black" />
+        <Text style={styles.logout}>
+          <SimpleLineIcons name="logout" size={24} color="white" />
           Logout
         </Text>
       </Pressable>
@@ -56,14 +55,35 @@ export function CryptoList() {
                     <ActivityIndicator size={"large"}/>
                 </View>
             ) :(
-            <FlatList
-                data={cryptos}
-                keyExtractor={(crypto) => crypto.id}
-                renderItem={({item, index}) => (
-                    <AnimatedCryptoCard crypto={ item } index={ index }/>
-                )}
-            />
+              <FlatList
+                  data={cryptos}
+                  keyExtractor={(crypto) => crypto.id}
+                  renderItem={({item, index}) => (
+                      <AnimatedCryptoCard crypto={ item } index={ index }/>
+                  )}
+              />
         )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#121212',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  wellcome: {
+    color: '#fff',
+    fontSize: 24,
+    marginBottom: 20
+  },
+  logout: {
+    color: '#fff',
+    fontSize: 16,
+    marginBottom: 20,
+    flexDirection: 'row',
+    alignItems: 'center'
+  }
+});

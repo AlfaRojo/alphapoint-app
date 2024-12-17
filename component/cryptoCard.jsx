@@ -1,26 +1,27 @@
 import { useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, Image, Animated, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Animated, useColorScheme } from 'react-native';
 import { Link } from 'expo-router';
 
 export function CryptoCard({ crypto }) {
+    const colorScheme = useColorScheme();
+    const isDarkMode = colorScheme === 'dark';
+
     return (
-      <Link href={`${crypto.id}`} >
-        <Pressable asChild>
-          <View key={crypto.id} style={styles.card}>
-            <Text style={styles.symbol}>#{crypto.rank} {crypto.name} ({crypto.symbol})</Text>
-            <Text style={styles.price_usd}>$ {parseFloat(crypto.price_usd).toLocaleString()}</Text>
+      <Link href={`${crypto.id}`}>
+          <View key={crypto.id} style={[styles.card, isDarkMode && styles.cardDark]}>
+            <Text style={[styles.symbol, isDarkMode && styles.symbolDark]}>#{crypto.rank} {crypto.name} ({crypto.symbol})</Text>
+            <Text style={[styles.price_usd, isDarkMode && styles.price_usdDark]}>$ {parseFloat(crypto.price_usd).toLocaleString()}</Text>
             <Text
             style={[
                 styles.percent_change_24h,
                 crypto.percent_change_24h > 0
                 ? styles.percent_change_24h_green
-                : styles.percent_change_24h_red,
+                : styles.percent_change_24h_red
             ]}
             >
             {crypto.percent_change_24h}%
             </Text>
           </View>
-        </Pressable>
       </Link>
     )
 }
@@ -46,29 +47,32 @@ export function AnimatedCryptoCard({ crypto, index }) {
 
 const styles = StyleSheet.create({
     card: {
+      width: "80%",
       marginBottom: 36,
-      borderColor: "#000"
+      padding: 16,
+      borderRadius: 8,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    cardDark: {
+      backgroundColor: "#333",
+      shadowColor: "#fff",
     },
     symbol: {
-      color: "#000",
+      color: "#fff",
       fontSize: 16,
       fontWeight: "bold",
       marginBottom: 10
     },
-    name: {
-      color: "#000",
-      fontSize: 16,
-      marginTop: 10
+    symbolDark: {
+      color: "#fff",
     },
-    rank: {
-      color: "#000",
+    price_usd: {
+      color: "#fff",
       fontSize: 16,
-  
     },
-    rice_usd: {
-      color: "#eee",
-      fontSize: 16,
-  
+    price_usdDark: {
+      color: "#fff",
     },
     percent_change_24h: {
       color: "gray",
