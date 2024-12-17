@@ -2,13 +2,13 @@
 
 ## About
 
-This React Native application allows users to view real-time crypto data, including:
+This React Native application allows users to view up to 5 request real-time crypto data, including:
 
-*   Login screen with username storage
-*   Filterable list of top 50 cryptocurrencies (CoinLore API)
-*   Real-time chart for selected coin (updates every 30 seconds, max 5 requests)
-*   Offline functionality for previously loaded data and charts
-*   User-friendly UI with basic adherence to platform design standards
+*   [x] Login screen with username 
+*   [x] Filterable list of top 50 cryptocurrencies (CoinLore API)
+*   [x] Real-time chart for selected coin (updates every 30 seconds, max 5 requests)
+*   [ ] Offline functionality for previously loaded data and charts
+*   [x] User-friendly UI with basic adherence to platform design standards
 
 ## Objective
 
@@ -24,41 +24,30 @@ Develop a functional React Native application within 24 hours.
 
 ### 2. Crypto List:
 
-*   Displays top 50 cryptocurrencies from CoinLore API (cached for offline use)
-*   "Minimum 24-hr % Change" input field lets users filter the list
-*   Filter button updates the list based on the entered percentage change value
-*   Offline functionality displays cached data and disables list item selection
-*   Overlay informs user about internet connection disruption
+*   Displays top 50 cryptocurrencies from CoinLore API
 
 ### 3. Real-time Chart:
 
 *   Displays a line chart for the selected cryptocurrency
 *   Calls CoinLore API every 30 seconds for up to 5 requests (max 2.5 minutes)
 *   Updates chart with retrieved price data and stores it locally
-*   Decrementing timer displays time until the next price fetch (online only)
-*   Offline functionality displays existing chart data
+*   Decrementing timer displays time until the next price fetch
 
 ## APIs
 
 *   **CoinLore API:**
     *   "Tickers (All Coins)" endpoint retrieves top 50 cryptocurrencies
     *   "Ticker (Specific Coin)" endpoint retrieves real-time price data
-    *   Consider alternative APIs if CoinLore is unavailable
-
+      
 ## Line Chart
 
 *   Use a library like `react-native-svg-charts`
 *   X-axis displays 24-hour clock time
 *   Y-axis displays price in USD
-*   Adjust axis ranges for clear readability
 
 ## Architecture
 
 *   Scalable and testable architecture
-
-## Offline Mode
-
-*   Seamless offline user experience
 
 ## UI/UX
 
@@ -68,7 +57,8 @@ Develop a functional React Native application within 24 hours.
 
 1.  Clone this repository.
 2.  Install dependencies (`npm install`).
-3.  Follow instructions within the codebase to run the application.
+3.  Run `npm run start`.
+   3.1.   Follow in-console commands to open web, Android or iOs
 
 ## Note
 
