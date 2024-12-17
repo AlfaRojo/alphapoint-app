@@ -6,6 +6,7 @@ import * as shape from "d3-shape";
 import { Link } from "expo-router";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { fetchCryptoData } from "../lib/coinlore";
 
 export default function Detail() {
   const { id } = useLocalSearchParams();
@@ -19,10 +20,7 @@ export default function Detail() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        `https://api.coinlore.net/api/ticker/?id=${id}`
-      );
-      const data = await response.json();
+      const data = await fetchCryptoData(id);
       setPriceData(data);
       setHistoricalData((prevData) => [
         ...prevData,
