@@ -50,11 +50,6 @@ export function CryptoList() {
         </Text>
       </Pressable>
       </Link>
-      <Link asChild href="/about">
-      <Pressable>
-        <Entypo name="info-with-circle" size={24} color="black" />
-      </Pressable>
-      </Link>
         {
             cryptos.length === 0 ? (
                 <View style={{ flex: 1, justifyContent: "center", alignContent: "center" }}>
