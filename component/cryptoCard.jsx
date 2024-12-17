@@ -1,21 +1,14 @@
 import { useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, Image, Animated } from 'react-native';
+import { StyleSheet, Text, View, Image, Animated, Pressable } from 'react-native';
+import { Link } from 'expo-router';
 
 export function CryptoCard({ crypto }) {
     return (
-        <View key={crypto.id} style={styles.card}>
-            <Text style={styles.symbol}>{crypto.symbol}</Text>
-            <Text style={styles.name}>{crypto.name}</Text>
-            <Text style={styles.rank}>{crypto.rank}</Text>
-            <Text style={styles.price_usd}>{crypto.price_usd}</Text>
-            {/* <Image
-            source={{ uri: crypto.graph }}
-            resizeMode="contain"
-            style={{
-                width: 107,
-                height: 147
-            }}
-            /> */}
+      <Link href={`${crypto.id}`} >
+        <Pressable asChild>
+          <View key={crypto.id} style={styles.card}>
+            <Text style={styles.symbol}>#{crypto.rank} {crypto.name} ({crypto.symbol})</Text>
+            <Text style={styles.price_usd}>$ {parseFloat(crypto.price_usd).toLocaleString()}</Text>
             <Text
             style={[
                 styles.percent_change_24h,
@@ -26,47 +19,49 @@ export function CryptoCard({ crypto }) {
             >
             {crypto.percent_change_24h}%
             </Text>
-        </View>
+          </View>
+        </Pressable>
+      </Link>
     )
 }
 
 export function AnimatedCryptoCard({ crypto, index }) {
-    const opacity = useRef(new Animated.Value(0)).current;
+  const opacity = useRef(new Animated.Value(0)).current;
 
-    useEffect(() => {
-        Animated.timing(opacity, {
-            toValue: 1,
-            duration: 300,
-            delay: index * 200,
-            useNativeDriver: true,
-        }).start();
-    }, [opacity, index]);
+  useEffect(() => {
+      Animated.timing(opacity, {
+        toValue: 1,
+        duration: 300,
+        delay: index * 200,
+        useNativeDriver: true,
+      }).start();
+  }, [opacity, index]);
 
-    return (
-        <Animated.View style={{ opacity }}>
-            <CryptoCard crypto={ crypto } />
-        </Animated.View>
-    )
+  return (
+      <Animated.View style={{ opacity }}>
+          <CryptoCard crypto={ crypto } />
+      </Animated.View>
+  )
 }
 
 const styles = StyleSheet.create({
     card: {
       marginBottom: 36,
-      borderColor: "#fff"
+      borderColor: "#000"
     },
     symbol: {
-      color: "#fff",
+      color: "#000",
       fontSize: 16,
       fontWeight: "bold",
       marginBottom: 10
     },
     name: {
-      color: "#fff",
+      color: "#000",
       fontSize: 16,
       marginTop: 10
     },
     rank: {
-      color: "#fff",
+      color: "#000",
       fontSize: 16,
   
     },
