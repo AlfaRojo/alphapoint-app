@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
     },
     cardDark: {
       backgroundColor: "#333",
-      shadowColor: "#fff",
     },
     symbol: {
       color: "#fff",
